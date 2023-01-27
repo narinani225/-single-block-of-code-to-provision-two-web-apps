@@ -7,7 +7,8 @@ terraform {
     }
   }
 }
-
+/*
+#Service connection for comapany Subscription
 provider "azurerm" {
   subscription_id = "664b6097-19f2-42a3-be95-a4a6b4069f6b"
   tenant_id       = "0adb040b-ca22-4ca6-9447-ab7b049a22ff"
@@ -16,6 +17,16 @@ provider "azurerm" {
   features {}
   skip_provider_registration = "true"
 }
+*/
+provider "azurerm" {
+  subscription_id = "3d0021b5-68cf-46a0-a5fc-ceef26c4e4e1"
+  tenant_id       = "503bb7b3-89b7-4714-a6b7-0a79deaffa3d"
+  client_id       = "6cb4d5ea-e6d2-4357-8652-e3566ee1914f"
+  client_secret   = "kU28Q~eVGQmdVClZmYRuR1eoc~-Q2wCeE8niyadY"
+  features {}
+  skip_provider_registration = "true"
+}
+
 
 
 module "aspplaneinfo" {
