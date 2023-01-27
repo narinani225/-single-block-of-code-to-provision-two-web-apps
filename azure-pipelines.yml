@@ -18,6 +18,10 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+steps:
+  - checkout: self
+
+
 
 
 
