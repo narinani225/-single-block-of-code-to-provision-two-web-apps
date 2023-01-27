@@ -1,0 +1,55 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+resources:
+ repositories:
+   - repository: -single-block-of-code-to-provision-two-web-apps
+     name: giri347/-single-block-of-code-to-provision-two-web-apps
+     type: github
+     endpoint: giri347
+     
+
+       
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+stages:
+  - stage: dev
+    jobs:
+      - job: dev
+        steps:
+          - task: TerraformInstaller@0
+            inputs:
+             terraformVersion: 'latest'
+          - task: TerraformTaskV3@3
+            inputs:
+             provider: 'azurerm'
+             command: 'init'
+             backendServiceArm: 'terraform'
+             backendAzureRmResourceGroupName: 'testing-webapp'
+             backendAzureRmStorageAccountName: 'azurewebapp151694'
+             backendAzureRmContainerName: '151694'
+             backendAzureRmKey: 'terraform.tfstate'
+  - stage: prod
+    jobs:
+      - job: prod
+        steps:
+          - task: TerraformTaskV3@3
+            inputs:
+             provider: 'azurerm'
+             command: 'plan'
+             environmentServiceNameAzureRM: 'terraform'
+
+   
+
+
+
+
+
+
+
