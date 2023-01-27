@@ -35,20 +35,21 @@ stages:
              backendAzureRmStorageAccountName: 'azurewebapp151694'
              backendAzureRmContainerName: '151694'
              backendAzureRmKey: 'terraform.tfstate'
-  - stage: prod
-    jobs:
       - job: prod
         steps:
-          - task: TerraformInstaller@0
+          - task: TerraformTaskV3@3
             inputs:
-             terraformVersion: 'latest'
+             provider: 'azurerm'
+             command: 'validate'
           - task: TerraformTaskV3@3
             inputs:
              provider: 'azurerm'
              command: 'plan'
              environmentServiceNameAzureRM: 'terraform'
 
-   
+              
+           
+ 
 
 
 
