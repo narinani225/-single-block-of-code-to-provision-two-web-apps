@@ -39,6 +39,9 @@ stages:
     jobs:
       - job: prod
         steps:
+          - task: TerraformInstaller@0
+            inputs:
+             terraformVersion: 'latest'
           - task: TerraformTaskV3@3
             inputs:
              provider: 'azurerm'
