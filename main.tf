@@ -27,13 +27,6 @@ provider "azurerm" {
   skip_provider_registration = "true"
 }
 
- backend "azurerm" {
-    resource_group_name = "testing-webapp"
-    storage_account_name = "azurewebapp151694"
-    container_name = "151694"
-    key = "terraform.tfstate"
-  }
-
 
 module "aspplaneinfo" {
   source   = "./modules/asp"

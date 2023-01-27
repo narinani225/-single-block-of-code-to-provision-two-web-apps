@@ -11,7 +11,7 @@ output "webplanname" {
 
 
 output "webappname" {
-    value = (module.webserviceeinfo.webappname)
-    sensitive = true
-  
+  value     = (module.webserviceeinfo.webappname)
+  sensitive = true
+
 }
