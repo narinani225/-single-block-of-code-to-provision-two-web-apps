@@ -18,8 +18,24 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-steps:
-  - checkout: self
+stages:
+  - stage: dev
+    jobs:
+      - job: dev
+        steps:
+          - task: TerraformInstaller@0
+            inputs:
+             terraformVersion: 'latest'
+          - task: TerraformTaskV3@3
+            inputs:
+             provider: 'azurerm'
+             command: 'init'
+             backendServiceArm: 'terraform'
+             backendAzureRmResourceGroupName: 'testing-webapp'
+             backendAzureRmStorageAccountName: 'azurewebapp151694'
+             backendAzureRmContainerName: '151694'
+             backendAzureRmKey: 'terraform.tfstate'
+  
 
 
 
