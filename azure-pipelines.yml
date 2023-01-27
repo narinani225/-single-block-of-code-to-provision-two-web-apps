@@ -36,6 +36,7 @@ stages:
              backendAzureRmContainerName: '151694'
              backendAzureRmKey: 'terraform.tfstate'
       - job: prod
+        dependsOn: dev
         steps:
           - task: TerraformTaskV3@3
             inputs:
