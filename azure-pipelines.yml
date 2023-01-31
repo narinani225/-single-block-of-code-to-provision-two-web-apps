@@ -28,31 +28,46 @@ stages:
              terraformVersion: 'latest'
           - task: TerraformTaskV3@3
             inputs:
-             provider: 'azurerm'
-             command: 'init'
-             backendServiceArm: 'terraform'
-             backendAzureRmResourceGroupName: 'testing-webapp'
-             backendAzureRmStorageAccountName: 'azurewebapp151694'
-             backendAzureRmContainerName: '151694'
-             backendAzureRmKey: 'terraform.tfstate'
-          - task: PublishBuildArtifacts@1
-            inputs:
-                 PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-                 ArtifactName: 'terraform'
-                 publishLocation: 'Container'
-      - job: prod
-        dependsOn: dev
-         
-        steps:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'einfo-terraform'
+              backendAzureRmResourceGroupName: 'sa1_test_eic_DevOpslearning'
+              backendAzureRmStorageAccountName: 'store15529900'
+              backendAzureRmContainerName: 'container1'
+              backendAzureRmKey: 'terraform.tfstate'
           - task: TerraformTaskV3@3
             inputs:
              provider: 'azurerm'
              command: 'validate'
+  - stage: prod
+    jobs:
+      - job: prod
+        
+        steps:
+          - task: TerraformInstaller@0
+            inputs:
+             terraformVersion: 'latest'
           - task: TerraformTaskV3@3
             inputs:
              provider: 'azurerm'
-             command: 'plan'
-             environmentServiceNameAzureRM: 'terraform'
+             command: 'init'
+             backendServiceArm: 'einfo-terraform'
+             backendAzureRmResourceGroupName: 'sa1_test_eic_DevOpslearning'
+             backendAzureRmStorageAccountName: 'store15529900'
+             backendAzureRmContainerName: 'container1'
+             backendAzureRmKey: 'terraform.tfstate'
+          - task: TerraformTaskV3@3
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              environmentServiceNameAzureRM: 'einfo-terraform'
+          - task: TerraformTaskV3@3
+            inputs:
+              provider: 'azurerm'
+              command: 'apply'
+              commandOptions: '-auto-approve'
+              environmentServiceNameAzureRM: 'einfo-terraform'
+  
 
 
       
