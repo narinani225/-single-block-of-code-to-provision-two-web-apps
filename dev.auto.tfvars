@@ -1,5 +1,5 @@
-#Rgname   = "sa1_test_eic_DevOpslearning"
-Rgname   = "testing-webapp"
+Rgname   = "sa1_test_eic_DevOpslearning"
+
 location = "Southeast Asia"
 
 aspplan  = "einfowebplan151694"
