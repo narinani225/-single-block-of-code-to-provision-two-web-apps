@@ -3,7 +3,7 @@ Rgname   = "sa1_test_eic_DevOpslearning"
 location = "Southeast Asia"
 
 aspplan  = "einfowebplan151694"
-webnames = ["einfowebappdev15169499", "einfowebapppro15169499"]
+webnames = ["einfowebappdev151694", "einfowebapppro151694"]
 tags = {
   "Resource Owner"   = "giribabu.chitteni@einfochipsindia.onmicrosoft.com"
   "Delivery Manager" = "ravi.jain@einfochips.com"
