@@ -35,8 +35,14 @@ stages:
              backendAzureRmStorageAccountName: 'azurewebapp151694'
              backendAzureRmContainerName: '151694'
              backendAzureRmKey: 'terraform.tfstate'
+          - task: PublishBuildArtifacts@1
+            inputs:
+                 PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+                 ArtifactName: 'terraform'
+                 publishLocation: 'Container'
       - job: prod
         dependsOn: dev
+         
         steps:
           - task: TerraformTaskV3@3
             inputs:
@@ -48,8 +54,8 @@ stages:
              command: 'plan'
              environmentServiceNameAzureRM: 'terraform'
 
-              
-           
+
+      
  
 
 
