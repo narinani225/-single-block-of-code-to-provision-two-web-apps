@@ -39,6 +39,28 @@ stages:
             inputs:
              provider: 'azurerm'
              command: 'validate'
+  - stage: prod
+    jobs:
+      - job: prod
+        
+        steps:
+          - task: TerraformInstaller@0
+            inputs:
+             terraformVersion: 'latest'
+          - task: TerraformTaskV3@3
+            inputs:
+             provider: 'azurerm'
+             command: 'init'
+             backendServiceArm: 'einfo-terraform'
+             backendAzureRmResourceGroupName: 'sa1_test_eic_DevOpslearning'
+             backendAzureRmStorageAccountName: 'store15529900'
+             backendAzureRmContainerName: 'container1'
+             backendAzureRmKey: 'terraform.tfstate'
+          - task: TerraformTaskV3@3
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              environmentServiceNameAzureRM: 'einfo-terraform'
   
 
 
