@@ -1,0 +1,62 @@
+resources:
+ repositories:
+   - repository: -single-block-of-code-to-provision-two-web-apps
+     name: narinani225/-single-block-of-code-to-provision-two-web-apps
+     endpoint: narinani225
+     type: github
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: dev
+    jobs:
+      - job: dev
+        steps:
+          - task: TerraformInstaller@0
+            inputs:
+             terraformVersion: 'latest'
+          - task: TerraformTaskV3@3
+            inputs:
+             provider: 'azurerm'
+             command: 'init'
+             backendServiceArm: 'testterraform'
+             backendAzureRmResourceGroupName: 'sa1_test_eic_DevOpslearning'
+             backendAzureRmStorageAccountName: 'store15529901'
+             backendAzureRmContainerName: 'container155'
+             backendAzureRmKey: 'terraform.tfstate'
+          - task: TerraformTaskV3@3
+            inputs:
+             provider: 'azurerm'
+             command: 'validate'
+  - stage: prod
+    jobs:
+      - job: prod
+        steps:
+          - task: TerraformInstaller@0
+            inputs:
+             terraformVersion: 'latest'
+          - task: TerraformTaskV3@3
+            inputs:
+             provider: 'azurerm'
+             command: 'init'
+             backendServiceArm: 'testterraform'
+             backendAzureRmResourceGroupName: 'sa1_test_eic_DevOpslearning'
+             backendAzureRmStorageAccountName: 'store15529901'
+             backendAzureRmContainerName: 'container155'
+             backendAzureRmKey: 'terraform.tfstate'
+          - task: TerraformTaskV3@3
+            inputs:
+             provider: 'azurerm'
+             command: 'plan'
+             environmentServiceNameAzureRM: 'testterraform'
+          - task: TerraformTaskV3@3
+            inputs:
+             provider: 'azurerm'
+             command: 'apply'
+             environmentServiceNameAzureRM: 'testterraform'
+
+ 
